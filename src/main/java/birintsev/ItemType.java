@@ -2,7 +2,7 @@ package birintsev;
 
 public enum ItemType {
     NEW,
-    REGULAR,
+    /*REGULAR,*/
     SECOND_FREE,
     SALE
 }

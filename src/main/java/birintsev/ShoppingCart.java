@@ -60,9 +60,9 @@ public class ShoppingCart {
         switch (type) {
             case NEW:
                 return 0;
-            case REGULAR:
+            /*case REGULAR:
                 discount = 0;
-                break;
+                break;*/
             case SECOND_FREE:
                 if (quantity > 1)
                     discount = 50;
@@ -88,7 +88,7 @@ public class ShoppingCart {
         cart.addItem("Apple", 0.99, 5, ItemType.NEW);
         cart.addItem("Banana", 20.00, 4, ItemType.SECOND_FREE);
         cart.addItem("A long piece of toilet paper", 17.20, 1, ItemType.SALE);
-        cart.addItem("Nails", 2.00, 500, ItemType.REGULAR);
+        /*cart.addItem("Nails", 2.00, 500, ItemType.REGULAR);*/
         System.out.println(cart.formatTicket());
     }
 
