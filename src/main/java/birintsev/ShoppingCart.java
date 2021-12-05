@@ -27,7 +27,12 @@ public class ShoppingCart {
      * Trims string if its length > width.
      * @param align -1 for align left, 0 for center and +1 for align right.
      */
-    public static void appendFormatted(StringBuilder sb, String value, int align, int width) {
+    public static void appendFormatted(
+        StringBuilder sb,
+        String value,
+        int align,
+        int width
+    ) {
         if (value.length() > width)
             value = value.substring(0,width);
         int before = (align == 0)
@@ -110,10 +115,10 @@ public class ShoppingCart {
         if (quantity <= 0)
             throw new IllegalArgumentException("Illegal quantity");
         Item item = new Item();
-        item.title = title;
-        item.price = price;
-        item.quantity = quantity;
-        item.type = type;
+        item.setTitle(title);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+        item.setType(type);
         items.add(item);
     }
 
@@ -145,14 +150,19 @@ public class ShoppingCart {
         double total = 0.00;
         int index = 0;
         for (Item item : items) {
-            int discount = calculateDiscount(item.type, item.quantity);
-            double itemTotal =
-                item.price * item.quantity * (100.00 - discount) / 100.00;
+            int discount = calculateDiscount(
+                item.getType(),
+                item.getQuantity()
+            );
+            double itemTotal = item.getPrice()
+                * item.getQuantity()
+                * (100.00 - discount)
+                / 100.00;
             lines.add(new String[] {
                 String.valueOf(++index),
-                item.title,
-                MONEY.format(item.price),
-                String.valueOf(item.quantity),
+                item.getTitle(),
+                MONEY.format(item.getPrice()),
+                String.valueOf(item.getQuantity()),
                 (discount == 0) ? "-" : (discount + "%"),
                 MONEY.format(itemTotal)
             });
