@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ShoppingCartCalculateDiscountTest {
 
+    private static final int VALID_PRICE = 1;
+
     @Test
     public void calculateDiscount_secondFree_oneItem() {
         testSecondFreeTypeDiscount(0, 1);
@@ -77,38 +79,32 @@ public class ShoppingCartCalculateDiscountTest {
 
     private void testCalculateDiscount(
         int expected,
-        ItemType itemType,
-        int quantity
+        Item item
     ) {
         assertEquals(
             expected,
-            ShoppingCart.calculateDiscount(itemType, quantity)
+            item.calculateDiscount()
         );
     }
 
     private void testSecondFreeTypeDiscount(int expected, int quantity) {
         testCalculateDiscount(
             expected,
-            ItemType.SECOND_FREE,
-            quantity
+            new SecondFreeItem("SecondFreeItem", VALID_PRICE, quantity)
         );
     }
 
     private void testSaleTypeDiscount(int expected, int quantity) {
         testCalculateDiscount(
             expected,
-            ItemType.SALE,
-            quantity
+            new SaleItem("SaleItem", VALID_PRICE, quantity)
         );
     }
 
     private void testNewTypeDiscount(int expected, int quantity) {
         testCalculateDiscount(
             expected,
-            ItemType.NEW,
-            quantity
+            new NewItem("NewItem", VALID_PRICE, quantity)
         );
     }
 }
-
-
