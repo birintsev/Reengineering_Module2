@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Unit test for simple App.
  */
-public class ShoppingCartTest {
+public class ShoppingCartAppendFormattedTest {
 
     private static final String EVEN_LENGTH_STRING = "TestString";
 
