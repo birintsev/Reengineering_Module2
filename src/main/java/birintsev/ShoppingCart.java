@@ -31,8 +31,8 @@ public class ShoppingCart {
         if (value.length() > width)
             value = value.substring(0,width);
         int before = (align == 0)
-                     ? (width - value.length()) / 2
-                     : (align == -1) ? 0 : width - value.length();
+            ? (width - value.length()) / 2
+            : (align == -1) ? 0 : width - value.length();
         int after = width - value.length() - before;
         while (before-- > 0)
             sb.append(" ");
@@ -97,7 +97,12 @@ public class ShoppingCart {
      *
      * @throws IllegalArgumentException if some value is wrong
      */
-    public void addItem(String title, double price, int quantity, ItemType type) {
+    public void addItem(
+        String title,
+        double price,
+        int quantity,
+        ItemType type
+    ) {
         if (title == null || title.length() == 0 || title.length() > 32)
             throw new IllegalArgumentException("Illegal title");
         if (price < 0.01)
@@ -132,15 +137,18 @@ public class ShoppingCart {
         if (items.size() == 0)
             return "No items.";
         List<String[]> lines = new ArrayList<>();
-        String[] header = { "#", "Item", "Price", "Quan.", "Discount", "Total" };
+        String[] header = {
+            "#", "Item", "Price", "Quan.", "Discount", "Total"
+        };
         int[] align = new int[] { 1, -1, 1, 1, 1, 1 };
         // formatting each line
         double total = 0.00;
         int index = 0;
         for (Item item : items) {
             int discount = calculateDiscount(item.type, item.quantity);
-            double itemTotal = item.price * item.quantity * (100.00 - discount) / 100.00;
-            lines.add(new String[]{
+            double itemTotal =
+                item.price * item.quantity * (100.00 - discount) / 100.00;
+            lines.add(new String[] {
                 String.valueOf(++index),
                 item.title,
                 MONEY.format(item.price),
@@ -150,17 +158,19 @@ public class ShoppingCart {
             });
             total += itemTotal;
         }
-        String[] footer = { String.valueOf(index),"","","","", MONEY.format(total) };
+        String[] footer = {
+            String.valueOf(index), "", "", "", "", MONEY.format(total)
+        };
         // formatting table
         // column max length
-        int[] width = new int[]{0,0,0,0,0,0};
+        int[] width = new int[] { 0, 0, 0, 0, 0, 0 };
         for (String[] line : lines)
             for (int i = 0; i < line.length; i++)
-                width[i] = (int) Math.max(width[i], line[i].length());
+                width[i] = Math.max(width[i], line[i].length());
         for (int i = 0; i < header.length; i++)
-            width[i] = (int) Math.max(width[i], header[i].length());
+            width[i] = Math.max(width[i], header[i].length());
         for (int i = 0; i < footer.length; i++)
-            width[i] = (int) Math.max(width[i], footer[i].length());
+            width[i] = Math.max(width[i], footer[i].length());
         // line length
         int lineLength = width.length - 1;
         for (int w : width)
